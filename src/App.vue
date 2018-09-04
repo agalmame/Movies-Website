@@ -27,6 +27,10 @@
     <v-toolbar color="indigo" dark fixed app>
       <v-toolbar-side-icon @click.native.stop="drawer = !drawer"></v-toolbar-side-icon>
       <v-toolbar-title>Home</v-toolbar-title>
+      <v-spacer></v-spacer>
+      <v-toolbar-items>
+        <v-btn flat :to="{ name: 'AddMovie'}" style="text-decration:none"> Add Movie</v-btn>
+      </v-toolbar-items>
     </v-toolbar>
     <v-content>
       <v-container fluid>
@@ -39,9 +43,7 @@
       <span class="white--text">&copy; 2018</span>
     </v-footer>
   </v-app>
-
 </template>
-
 <script>
 import './assets/stylesheets/main.css'
 export default {
