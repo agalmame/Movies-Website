@@ -1,91 +1,68 @@
 <template>
+<v-layout row>
+    <v-flex>
+      <v-alert
+        type="success" 
+        :value="alerted"  
+        dismissible
+      >
+        Added successefully
+      </v-alert>
+    </v-flex>
   <v-layout row wrap>
-    <v-flex xs5>
+    <v-flex xs5 v-for="movie in movies" :key="movie._id">
       <v-card>
         <v-card-title primary>
           <div>
-            <div class="headline">Batman vs Superman</div>
-            <span class="grey--text">2016. Science fiction film/Action . 3h 5m</span>
+            <div class="headline">{{movie.name}}</div>
+            <span class="grey--text">{{movie.release_year}} - {{movie.genre}}</span>
           </div>
         </v-card-title>
         <v-card-text>
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-           Officia corrupti totam quod consequatur quia deserunt! 
-           Veniam, beatae, distinctio, qui laboriosam dicta non corrupti
-           nesciunt expedita id culpa hic accusamus necessitatibus?
+            {{movie.description}}
         </v-card-text>
         <v-card-actions>
           <v-btn flat color="purple">Rate this movie</v-btn>
           <v-spacer></v-spacer>
         </v-card-actions>
       </v-card>
-    </v-flex>
-    <v-flex xs5>
-      <v-card>
-        <v-card-title primary-title>
-          <div>
-            <div class="headline">Logan</div>
-            <span class="grey--text">2017 . drama/Science fiction film . 2h 20m</span>
-          </div>
-        </v-card-title>
-        <v-card-text >
-            Lorem ipsum dolor sit amet consectetur adipisicing elit.
-          Doloribus, iste corporis dolore harum fuga a pariatur
-          consequatur, omnis necessitatibus ducimus
-           fugiat rem ut, suscipit sint et aut voluptas eius non.
-        </v-card-text>
-        <v-card-actions>
-          <v-btn flat color="purple">Rate this movie</v-btn>
-          <v-spacer></v-spacer>
-        </v-card-actions>
-      </v-card>
-    </v-flex>
-    <v-flex xs5>
-      <v-card>
-        <v-card-title primary>
-          <div>
-            <div class="headline">catch me if you can</div>
-            <span class="grey--text">1997. ditective/drama . 3h 15m</span>
-          </div>
-        </v-card-title>
-        <v-card-text>
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-           Officia corrupti totam quod consequatur quia deserunt! 
-           Veniam, beatae, distinctio, qui laboriosam dicta non corrupti
-           nesciunt expedita id culpa hic accusamus necessitatibus?
-        </v-card-text>
-        <v-card-actions>
-          <v-btn flat color="purple">Rate this movie</v-btn>
-          <v-spacer></v-spacer>
-        </v-card-actions>
-      </v-card>
-    </v-flex>
-    <v-flex xs5>
-      <v-card>
-        <v-card-title primary-title>
-          <div>
-            <div class="headline">last time</div>
-            <span class="grey--text">2016. Science fiction film/Action . 3h 5m</span>
-          </div>
-        </v-card-title>
-        <v-card-text>
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-           Officia corrupti totam quod consequatur quia deserunt! 
-           Veniam, beatae, distinctio, qui laboriosam dicta non corrupti
-           nesciunt expedita id culpa hic accusamus necessitatibus?
-        </v-card-text>
-        <v-card-actions>
-          <v-btn flat color="purple">Rate this movie</v-btn>
-          <v-spacer></v-spacer>
-        </v-card-actions>
-      </v-card>
-    </v-flex>    
+    </v-flex>   
   </v-layout>
+</v-layout>
 </template>
 
 <script>
+import axios from 'axios'
 export default {
-
+  name: 'movie',
+  data(){
+    return {
+      movies: {}
+    }
+  },
+  mounted(){
+    this.fetchAllMovies()
+  },
+  methods:{
+    async fetchAllMovies(){
+      return axios({
+        method:'get',
+        url: 'http://localhost:8083/movies',
+      })
+      .then(res=>{
+        this.movies=res.data.movies
+        console.log(movies)
+      })
+      .catch(err=>{
+        console.log(err)
+      })
+    }
+  },
+  computed:{
+    alerted(){
+      return this.$store.getters.alertState
+    } ,
+  },
 }
 </script>
 

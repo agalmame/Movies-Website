@@ -1,9 +1,9 @@
 <template>
   <v-app id="inspire">
     <v-navigation-drawer
-    fixed
-    v-model="drawer"
-    app
+      fixed
+      v-model="drawer"
+      app
     >
       <v-list dense>
         <router-link :to="{name: 'Home'}" class="side_bar_link">

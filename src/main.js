@@ -2,12 +2,13 @@
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap-vue/dist/bootstrap-vue.css';
-import BootstrapVue from 'bootstrap-vue';
 
+import BootstrapVue from 'bootstrap-vue';
 import Vue from 'vue'
 import vuetify from 'vuetify'
 import App from './App'
 import router from './router'
+import {store} from './store/index'
 
 Vue.config.productionTip = false
 
@@ -18,6 +19,7 @@ Vue.use(BootstrapVue)
 new Vue({
   el: '#app',
   router,
+  store,
   components: { App },
   template: '<App/>'
 })
