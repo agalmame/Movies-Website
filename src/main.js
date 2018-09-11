@@ -9,11 +9,13 @@ import vuetify from 'vuetify'
 import App from './App'
 import router from './router'
 import {store} from './store/index'
+import VueSwal from 'vue-swal'
 
 Vue.config.productionTip = false
 
 Vue.use(vuetify)
 Vue.use(BootstrapVue)
+Vue.use(VueSwal) 
 
 /* eslint-disable no-new */
 new Vue({

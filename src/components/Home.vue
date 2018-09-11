@@ -14,7 +14,9 @@
       <v-card>
         <v-card-title primary>
           <div>
-            <div class="headline">{{movie.name}}</div>
+            <div class="headline">
+              <v-btn flat color="purple" :to='"movies/"+movie._id'>{{movie.name}}</v-btn>
+              </div>
             <span class="grey--text">{{movie.release_year}} - {{movie.genre}}</span>
           </div>
         </v-card-title>
@@ -22,7 +24,6 @@
             {{movie.description}}
         </v-card-text>
         <v-card-actions>
-          <v-btn flat color="purple">Rate this movie</v-btn>
           <v-spacer></v-spacer>
         </v-card-actions>
       </v-card>
@@ -42,14 +43,16 @@ export default {
   },
   mounted(){
     this.fetchAllMovies()
+
   },
   methods:{
-    async fetchAllMovies(){
+     fetchAllMovies(){
       return axios({
         method:'get',
         url: 'http://localhost:8083/movies',
       })
       .then(res=>{
+        console.log(res.data)
         this.movies=res.data.movies
         console.log(movies)
       })
